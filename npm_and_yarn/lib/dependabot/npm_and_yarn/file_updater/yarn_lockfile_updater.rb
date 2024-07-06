@@ -141,6 +141,10 @@ module Dependabot
             #   process_termsig: process.termsig
             # }
             # TODO - Need to parse the error context and raise the appropriate error
+            # Needs to check different errors for same events happening on sentry and come up with a sollution
+            # If all errors are related to dependency not found then raise Dependabot::DependencyNotFound error
+            # Also as investigated some of the errors are not throwing the errors in same way as dependency not found
+            # so need to check for those errors and raise the appropriate error
           end
 
           names = dependencies.map(&:name)
