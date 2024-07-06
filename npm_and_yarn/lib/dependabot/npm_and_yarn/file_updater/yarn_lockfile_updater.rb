@@ -131,6 +131,16 @@ module Dependabot
           # package.json name cannot contain characters like empty string or @.
           if e.message.include?("Name contains illegal characters")
             raise Dependabot::DependencyFileNotParseable, e.message
+            # "/opt/npm_and_yarn/node_modules/@dependabot/yarn-lib/lib/package-request.js:187\n          throw new (_errors || _load_errors()).MessageError(_this.reporter.lang('requiredPackageNotFoundRegistry', pattern, _this.parentRequest.pattern, _this.registry));\n                ^\n\nMessageError: Couldn't find package \"@dicetechnology/dice-unity@^2.26.3\" required by \"react-native-video@file:../..\" on the \"npm\" registry.\n    at /opt/npm_and_yarn/node_modules/@dependabot/yarn-lib/lib/package-request.js:187:17\n    at Generator.throw (<anonymous>)\n    at step (/opt/npm_and_yarn/node_modules/babel-runtime/helpers/asyncToGenerator.js:17:30)\n    at /opt/npm_and_yarn/node_modules/babel-runtime/helpers/asyncToGenerator.js:30:13\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {\n  code: undefined\n}\n\nNode.js v20.15.0\n",
+            # error_class = {command: command,
+            #   function: function,
+            #    args: args,
+            #   time_taken: time_taken,
+            #   stderr_output: stderr ? stderr[0..50_000] : "", # Truncate to ~100kb
+            #   process_exit_value: process.to_s,
+            #   process_termsig: process.termsig
+            # }
+            # TODO - Need to parse the error context and raise the appropriate error
           end
 
           names = dependencies.map(&:name)
